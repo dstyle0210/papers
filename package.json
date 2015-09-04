@@ -1,0 +1,24 @@
+{
+  "name": "papers",
+  "version": "1.0.0",
+  "description": "구글스프레드 시트 데이터를 기반으로 웹퍼블리싱 진행상태를 보여주도록 한다.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dstyle0210/papers.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dstyle0210/papers/issues"
+  },
+  "homepage": "https://github.com/dstyle0210/papers",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-csso": "^1.0.0",
+    "gulp-sass": "^2.0.4"
+  }
+}

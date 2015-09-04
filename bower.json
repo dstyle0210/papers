@@ -1,0 +1,21 @@
+{
+  "name": "papers",
+  "version": "0.0.0",
+  "homepage": "https://github.com/dstyle0210/papers",
+  "authors": [
+    "dstyle <dstyle0210@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "bootstrap": "~3.3.5",
+    "angular": "~1.4.5",
+    "angular-route": "~1.4.5"
+  }
+}
