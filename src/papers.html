@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko" ng-app="myApp">
+<html lang="ko" ng-app="gateApp">
 <head>
     <meta charset="UTF-8">
     <title>Paper : Also the progress of each page of the web site</title>
@@ -31,12 +31,16 @@
         <thead>
         <tr>
             <th>
-                <select name="" id="" ng-model="searchText">
+                <select name="" id="searchText" ng-model="searchText">
                     <option value="">1depth</option>
-                    <option value="메인">메인</option>
                 </select>
             </th>
-            <th>2depth</th>
+            <th>
+                <select name="" id="searchText2" ng-model="searchText2">
+                    <option value="">2depth</option>
+                </select>
+
+            </th>
             <th>3depth</th>
             <th>4depth</th>
             <th>파일이름</th>
@@ -44,12 +48,12 @@
             <th>업무자</th>
             <th>검수자</th>
             <th>검수일</th>
-            <th>비고</th>Website Unit Structure
+            <th>비고</th>
         </tr>
         </thead>
-        <tbody ng-controller="paperRepeatCtrl">
-        <tr ng-repeat="x in cells | filter:searchText | filter:searchText2 ">
-            <td>{{ x.depth1 }}</td>
+        <tbody ng-controller="customersCtrl">
+        <tr ng-repeat="x in papers | filter:searchText | filter:searchText2 ">
+            <td searchText="{{ x.searchDepth1 }}">{{ x.depth1 }}</td>
             <td>{{ x.depth2 }}</td>
             <td>{{ x.depth3 }}</td>
             <td>{{ x.depth4 }}</td>
@@ -66,8 +70,80 @@
 <!-- // 구조표 -->
 
 <!-- javascript -->
-<script data-main="js/papers" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.20/require.js"></script>
-<!-- // javascript -->
+<!--<script data-main="js/papers" src="js/require.js"></script>-->
 
+<script src="js/lib/jquery.js"></script>
+<script src="js/lib/angular.min.js"></script>
+<script src="js/lib/underscore.js"></script>
+<script type="text/javascript">
+    var gateKey = "1g1SqqR6QawK8zJe2nRXJz9vB4VfqMLHI9AbfX6fisr8"; // 구글스프레드시트 ID (정적사용)
+    var key = gateKey;
+    var url = "https://spreadsheets.google.com/feeds/list/"+key+"/1/public/values?alt=json";
+    var app = angular.module('gateApp', []);
+    app.controller("customersCtrl",function($scope,$http){
+        $http.get(url).success(function(response){
+            var idx = 0;
+            var cells = _.map(response.feed.entry,function(data){
+                var o = {};
+                for(key in data){
+                    if(key.indexOf("gsx$")!= -1){
+                        var nkey = key.split("gsx$")[1];
+                        o[nkey] = data[key].$t;
+                    }
+                }
+                return o;
+            });
+            cells = _.rest(cells); // 맨 처음 데이터를 지우고 리턴함.
+
+
+            var papers = _.map(cells,function(paper,idx){
+                if(paper.depth1==""){
+                    paper.searchDepth1 = cells[idx-1].searchDepth1;
+                }else{
+                    paper.searchDepth1 = paper.depth1;
+                };
+
+                if(paper.depth2==""){
+                    if( paper.depth1!=""){
+                        paper.searchDepth2 = "";
+                    }else if(paper.depth1==""){
+                        paper.searchDepth2 = cells[idx-1].searchDepth2;
+                    }
+                }else{
+                    paper.searchDepth2 = paper.depth2;
+                };
+
+                return paper;
+            });
+
+
+
+
+            var selectArr = _.filter(cells,function(cell){
+                return (cell.depth1!="");
+            });
+            _.each(selectArr,function(cell){
+                $("#searchText").append("<option>"+cell.depth1+"</option>");
+            });
+
+            var selectArr2 = _.filter(cells,function(cell){
+                return (cell.depth2!="");
+            });
+            _.each(selectArr2,function(cell){
+                $("#searchText2").append("<option>"+cell.depth2+"</option>");
+            });
+
+
+
+
+
+
+
+
+
+            $scope.papers = papers; // 맨 처음 데이터를 지우고 리턴함.
+        });
+    });
+</script>
 </body>
 </html>

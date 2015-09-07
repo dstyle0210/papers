@@ -16,6 +16,8 @@
   "devDependencies": {
     "bootstrap": "~3.3.5",
     "angular": "~1.4.5",
-    "angular-route": "~1.4.5"
+    "angular-route": "~1.4.5",
+    "requirejs-domready": "~2.0.1",
+    "underscore": "~1.8.3"
   }
 }
