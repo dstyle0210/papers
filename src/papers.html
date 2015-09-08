@@ -2,25 +2,32 @@
 <html lang="ko" ng-app="gateApp">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Paper : Also the progress of each page of the web site</title>
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/papers.css"/>
 </head>
 <body>
-<h1>Papers</h1>
-<div class="iconGuide">
-    <strong>진행대기 <span class="ico">2015-06-00</span></strong>
-    <strong>퍼블종료 <span class="ico done">.done</span></strong>
-    <strong>기획검수중 <span class="ico edit">.edit</span></strong>
-    <strong>개발가능 <span class="ico finish">.finish</span></strong>
+<div class="container-fluid">
+    <h1>Papers <small>Also the progress of each page of the web site</small></h1>
 </div>
-
+<div class="container-fluid">
+    <div class="iconGuide">
+        <strong>진행대기 <span class="ico">2015-06-00</span></strong>
+        <strong>퍼블종료 <span class="ico done">.done</span></strong>
+        <strong>기획검수중 <span class="ico edit">.edit</span></strong>
+        <strong>개발가능 <span class="ico finish">.finish</span></strong>
+    </div>
+</div>
+<div class="container-fluid">
 <!-- 구조표 -->
 <section class="gateSection">
-    <table class="tblList" id="gateTable" width="100%">
+    <table class="table table-hover" id="gateTable" width="100%">
         <colgroup>
-            <col style="width:100px" />
-            <col style="width:auto" span="3" />
+            <col style="width:120px" />
+            <col style="width:auto" />
+            <col style="width:auto" />
+            <col style="width:auto" />
             <col style="width:8%" />
             <col style="width:90px" />
             <col style="width:90px" />
@@ -31,44 +38,39 @@
         <thead>
         <tr>
             <th>
-                <select name="" id="searchText" ng-model="searchText">
+                <select name="" id="searchText" class="form-control" ng-model="search.dept1">
                     <option value="">1depth</option>
                 </select>
             </th>
-            <th>
-                <select name="" id="searchText2" ng-model="searchText2">
-                    <option value="">2depth</option>
-                </select>
-
-            </th>
+            <th>2depth</th>
             <th>3depth</th>
             <th>4depth</th>
             <th>파일이름</th>
             <th>퍼블종료일</th>
-            <th>업무자</th>
-            <th>검수자</th>
-            <th>검수일</th>
-            <th>비고</th>
+            <th class="hidden-xs hidden-sm">업무자</th>
+            <th class="hidden-xs hidden-sm">검수자</th>
+            <th class="hidden-xs hidden-sm">검수일</th>
+            <th class="hidden-xs hidden-sm">비고</th>
         </tr>
         </thead>
         <tbody ng-controller="customersCtrl">
-        <tr ng-repeat="x in papers | filter:searchText | filter:searchText2 ">
-            <td searchText="{{ x.searchDepth1 }}">{{ x.depth1 }}</td>
+        <tr ng-repeat="x in papers | filter:search:strict">
+            <td dept1="{{ x.dept1 }}">{{ x.depth1 }}</td>
             <td>{{ x.depth2 }}</td>
             <td>{{ x.depth3 }}</td>
             <td>{{ x.depth4 }}</td>
             <td><a href="{{ x.file }}">{{ x.filename }}</a></td>
-            <td>{{ x.enddate }}</td>
-            <td>{{ x.worker }}</td>
-            <td>{{ x.debuger }}</td>
-            <td>{{ x.debugdate }}</td>
-            <td>{{ x.comment }}</td>
+            <td><span class="ico {{x.conditionClass}}">{{ x.enddate }}</span></td>
+            <td class="hidden-xs hidden-sm">{{ x.worker }}</td>
+            <td class="hidden-xs hidden-sm">{{ x.debuger }}</td>
+            <td class="hidden-xs hidden-sm">{{ x.debugdate }}</td>
+            <td class="hidden-xs hidden-sm">{{ x.comment }}</td>
         </tr>
         </tbody>
     </table>
 </section>
 <!-- // 구조표 -->
-
+</div>
 <!-- javascript -->
 <!--<script data-main="js/papers" src="js/require.js"></script>-->
 
@@ -85,6 +87,7 @@
             var idx = 0;
             var cells = _.map(response.feed.entry,function(data){
                 var o = {};
+                // 1차정제(스프레드시트 데이터)
                 for(key in data){
                     if(key.indexOf("gsx$")!= -1){
                         var nkey = key.split("gsx$")[1];
@@ -95,24 +98,26 @@
             });
             cells = _.rest(cells); // 맨 처음 데이터를 지우고 리턴함.
 
-
+            // 2차정제 (실제로 사용할 데이터)
             var papers = _.map(cells,function(paper,idx){
+
+                // 1뎁스 검색을 위한 별도 데이터 삽입.
                 if(paper.depth1==""){
-                    paper.searchDepth1 = cells[idx-1].searchDepth1;
+                    paper.dept1 = cells[idx-1].dept1;
                 }else{
-                    paper.searchDepth1 = paper.depth1;
+                    paper.dept1 = paper.depth1;
                 };
 
-                if(paper.depth2==""){
-                    if( paper.depth1!=""){
-                        paper.searchDepth2 = "";
-                    }else if(paper.depth1==""){
-                        paper.searchDepth2 = cells[idx-1].searchDepth2;
-                    }
-                }else{
-                    paper.searchDepth2 = paper.depth2;
+                // 현재 상태를 보여주기 위핸 컨디션 변경.
+                if(paper.condition=="진행대기"){
+                    paper.conditionClass = "guide"
+                }else if(paper.condition=="퍼블완료"){
+                    paper.conditionClass = "done"
+                }else if(paper.condition=="기획검수중"){
+                    paper.conditionClass = "edit"
+                }else if(paper.condition=="개발가능"){
+                    paper.conditionClass = "finish"
                 };
-
                 return paper;
             });
 
@@ -124,13 +129,6 @@
             });
             _.each(selectArr,function(cell){
                 $("#searchText").append("<option>"+cell.depth1+"</option>");
-            });
-
-            var selectArr2 = _.filter(cells,function(cell){
-                return (cell.depth2!="");
-            });
-            _.each(selectArr2,function(cell){
-                $("#searchText2").append("<option>"+cell.depth2+"</option>");
             });
 
 
