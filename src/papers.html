@@ -1,15 +1,39 @@
 <!doctype html>
-<html lang="ko" ng-app="gateApp">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Paper : Also the progress of each page of the web site</title>
+    <title>Papers : 웹페이지 진행확인</title>
+    <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/papers.css"/>
 </head>
-<body>
+<body ng-app="gateApp">
+<div class="papersHeader container-fluid">
+    <div class="row">
+        <div class="paersH1 col-md-8"><h1>Papers</h1></div>
+        <div class="progressCaseDiv col-md-3">
+            <div class="progress">
+                <div class="progress-bar progress-bar-primary" id="progress-done" style="min-width:5%;width: 0%">
+                    <strong>0%</strong> <span class="sr-only">35% Complete (success)</span>
+                </div>
+                <div class="progress-bar progress-bar-warning progress-bar-striped" id="progress-edit" style="min-width:5%;width: 0%">
+                    <strong>0%</strong> <span class="sr-only">20% Complete (warning)</span>
+                </div>
+                <div class="progress-bar progress-bar-success" id="progress-finish" style="min-width:5%;width: 0%">
+                    <strong>0%</strong> <span class="sr-only">10% Complete (danger)</span>
+                </div>
+            </div>
+        </div>
+        <div class="btnSet col-md-1">
+            <a href="#"><i class="fa fa-file-text-o fa-lg"></i></a>
+            <a href="#"><i class="fa fa-github-alt fa-lg"></i></a>
+        </div>
+    </div>
+</div>
 <div class="container-fluid">
-    <h1>Papers <small>Also the progress of each page of the web site</small></h1>
+
 </div>
 <div class="container-fluid">
     <div class="iconGuide">
@@ -122,8 +146,7 @@
             });
 
 
-
-
+            // 1depth 셀렉트 데이터 삽입.
             var selectArr = _.filter(cells,function(cell){
                 return (cell.depth1!="");
             });
@@ -131,7 +154,37 @@
                 $("#searchText").append("<option>"+cell.depth1+"</option>");
             });
 
+            // 프로그래스바 데이터 삽입.
+            var papersSize = _.size(papers);
+            function getConditionClassPercent(condition){
+                var r = {};
+                r.size = _.size(_.filter(papers,function(paper){ return paper.conditionClass==condition; }));
+                r.per = ((r.size/papersSize)*100).toFixed(2);
+                return r;
+            };
+            function setPrograssBarPercent(condition){
+                var per = getConditionClassPercent(condition).per;
+                var size = getConditionClassPercent(condition).size;
+                $("#progress-"+condition+" strong").html(per+"% ("+size+"/"+papersSize+")");
+                $("#progress-"+condition).css({"width":per+"%"});
+            };
+            setPrograssBarPercent("done");
+            setPrograssBarPercent("edit");
+            setPrograssBarPercent("finish");
 
+
+
+            /*var doneArr =
+            var editArr = _.filter(papers,function(paper){
+                return paper.conditionClass=="edit";
+            });
+            var finishArr = _.filter(papers,function(paper){
+                return paper.conditionClass=="finish";
+            });
+
+            ((doneArr.length/size)*100)+"%";
+            $("#progress-done strong").html(((doneArr.length/size)*100)+"%";)
+            console.log(size+","+doneArr.length+","+editArr.length+","+finishArr.length);*/
 
 
 

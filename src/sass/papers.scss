@@ -6,13 +6,10 @@ $icoFontFamily:"맑은 고딕";
 $icoFontSize:11px;
 
 // 아이콘 배경컬러 설정
-
 $icoGuideColor:$brand-muted; // 대기중
 $icoDoneColor:$brand-primary; // 퍼블종료,검수요청
 $icoEditColor:$brand-warning; // 검수진행중
 $icoFinishColor:$brand-success; // 개발가능
-
-
 
 // 아이콘
 span.ico {display:inline-block; background:$icoGuideColor; text-transform:uppercase; font-size:$icoFontSize; font-family:$icoFontFamily; border-radius:2px; color:#FFF; min-width:30px; padding:5px 5px 5px 5px; margin:0 3px 0 0;  line-height:11px; text-align:center; vertical-align:middle;
@@ -28,4 +25,20 @@ span.ico {display:inline-block; background:$icoGuideColor; text-transform:upperc
     .ico{margin-right:6px}
     &:last-child{margin-right:0;}
   }
+}
+
+// 헤더영역
+.papersHeader{background:#333;border-bottom:1px solid #ccc;
+  .paersH1{padding-top:10px;}
+  h1{padding:0;margin:0;font-size:2em;color:#fff;font-family: 'Poiret One', cursive;}
+  .progressCaseDiv{padding:15px 0;
+    .progress{margin-bottom:0;
+
+    }
+  }
+  .btnSet{padding-top:5px;
+    a{display:inline-block;border:1px solid #fff;padding:5px;}
+  }
+  .glyphicon{color:#fff;}
+  .fa{color:#fff;}
 }
