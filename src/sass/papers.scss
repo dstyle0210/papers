@@ -12,11 +12,11 @@ $icoEditColor:$brand-warning; // 검수진행중
 $icoFinishColor:$brand-success; // 개발가능
 
 // 아이콘
-span.ico {display:inline-block; background:$icoGuideColor; text-transform:uppercase; font-size:$icoFontSize; font-family:$icoFontFamily; border-radius:2px; color:#FFF; min-width:30px; padding:5px 5px 5px 5px; margin:0 3px 0 0;  line-height:11px; text-align:center; vertical-align:middle;
-  &.guide { background:$icoGuideColor;}
-  &.done { background:$icoDoneColor;}
-  &.edit { background:$icoEditColor;}
-  &.finish { background:$icoFinishColor;}
+span.ico {display:inline-block; background:#fff; text-transform:uppercase; font-size:$icoFontSize; font-family:$icoFontFamily; border-radius:2px; color:#333; min-width:30px; padding:5px 5px 5px 5px; margin:0 3px 0 0;  line-height:11px; text-align:center; vertical-align:middle;
+  &.guide { background:$icoGuideColor; color:#FFF;}
+  &.done { background:$icoDoneColor; color:#FFF;}
+  &.edit { background:$icoEditColor; color:#FFF;}
+  &.finish { background:$icoFinishColor; color:#FFF;}
 }
 
 // 아이콘 설명 부분
