@@ -1,19 +1,24 @@
 @charset "UTF-8";
 @import "bootstrap_variables";
 
+body{font-family:"Nanum Barun Gothic";font-weight:400;}
+
 // 아이콘 폰트설정
 $icoFontFamily:"맑은 고딕";
 $icoFontSize:11px;
 
 // 아이콘 배경컬러 설정
-$icoGuideColor:$brand-muted; // 대기중
+$icoReadyColor:$brand-muted; // 대기중
 $icoDoneColor:$brand-primary; // 퍼블종료,검수요청
 $icoEditColor:$brand-warning; // 검수진행중
 $icoFinishColor:$brand-success; // 개발가능
 
+
+
 // 아이콘
 span.ico {display:inline-block; background:#fff; text-transform:uppercase; font-size:$icoFontSize; font-family:$icoFontFamily; border-radius:2px; color:#333; min-width:30px; padding:5px 5px 5px 5px; margin:0 3px 0 0;  line-height:11px; text-align:center; vertical-align:middle;
-  &.guide { background:$icoGuideColor; color:#FFF;}
+  *{vertical-align:top;}
+  &.ready { background:$icoReadyColor; color:#FFF;}
   &.done { background:$icoDoneColor; color:#FFF;}
   &.edit { background:$icoEditColor; color:#FFF;}
   &.finish { background:$icoFinishColor; color:#FFF;}
@@ -27,18 +32,50 @@ span.ico {display:inline-block; background:#fff; text-transform:uppercase; font-
   }
 }
 
+// 프로그래스 컬러
+.progress-bar-ready{background-color:$icoReadyColor;}
+.progress-bar-done{background-color:$icoDoneColor;}
+.progress-bar-edit{background-color:$icoEditColor;}
+.progress-bar-finish{background-color:$icoFinishColor;}
+
 // 헤더영역
+.panel-heading{
+  .progress{margin-bottom:0;}
+}
 .papersHeader{background:#333;border-bottom:1px solid #ccc;
-  .paersH1{padding-top:10px;}
-  h1{padding:0;margin:0;font-size:2em;color:#fff;font-family: 'Poiret One', cursive;}
-  .progressCaseDiv{padding:15px 0;
+  .paersH1{padding:10px;}
+  h1{padding:0;margin:0;color:#fff;
+    span{font-family: 'Poiret One', cursive;font-size:28px;}
+    strong{font-size:16px;}
+  }
+  .progressCaseDiv{padding:20px 0;
     .progress{margin-bottom:0;
 
     }
   }
-  .btnSet{padding-top:5px;
-    a{display:inline-block;border:1px solid #fff;padding:5px;}
+  .btnSet{padding-top:15px;text-align:right;min-width:110px;
+    a{display:inline-block;border:1px solid #fff;padding:5px;margin-left:8px;}
   }
   .glyphicon{color:#fff;}
   .fa{color:#fff;}
 }
+
+
+// 표영역
+.fileListTable{table-layout:fixed;
+  th{font-size:11px;}
+  td{font-size:12px;}
+  th,td{
+    &.worker,&.debug,&.stats{text-align:center;}
+  };
+  th.comment{text-align:center;}
+  .paper{width:60%;}
+  .worker{width:80px;}
+  .debug{width:100px;}
+  .stats{width:120px;}
+  .comment{width:auto;}
+}
+
+
+
+
