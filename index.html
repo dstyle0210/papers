@@ -62,7 +62,6 @@ TODO 릴리즈 노트 추가.
                     </div>
                     <p id="papersUrl" style="padding-top: 10px;"><span class="text-sheet">시트</span>에서 복사된 공유링크를 넣으시고, <kbd>Papers 주소받기</kbd> 버튼을 누르세요!</p>
 
-
                     <!--
                     Papers :
                     -->
@@ -190,9 +189,12 @@ try {
 <script>
 function makePapersUrl(){
     var dumpUrl = $("#spreadsheetURL").val();
-    var paperUrl = (dumpUrl) ? ((dumpUrl).split("/d/")[1]).split("/pubhtml")[0] : "복사된 URL을 입력하세요.";
-    var yourPapers = "http://dstyle0210.github.io/papers/dist/papers.html?papers="+paperUrl;
-    $("#papersUrl").html("Papers : <a href='"+yourPapers+"'>"+yourPapers+"</a>");
+    if(dumpUrl){
+        var yourPapers = "http://dstyle0210.github.io/papers/dist/papers.html?papers="+(((dumpUrl).split("/d/")[1]).split("/pubhtml")[0]);
+        $("#papersUrl").html("Papers : <a href='"+yourPapers+"'>"+yourPapers+"</a>");
+    }else{
+        $("#papersUrl").html("복사된 URL을 입력하세요.");
+    }
 };
 </script>
 </body>
