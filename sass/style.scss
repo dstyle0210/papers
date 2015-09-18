@@ -2,6 +2,10 @@
 @import "../src/sass/bootstrap_variables";
 
 body,kbd{font-family:"Nanum Barun Gothic";font-weight:400;}
+code span{font-family:"Nanum Barun Gothic"}
+span.text-sheet{color:#ff6600;}
+
+// 시트랑 링크랑 컬러 변경.
 
 // Header.
 header{background:#333;border-bottom:10px solid $brand-warning;

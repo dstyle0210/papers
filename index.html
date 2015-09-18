@@ -43,13 +43,13 @@ TODO 릴리즈 노트 추가.
                 <h3>1. 구글스프레드시트 만들기</h3>
                 <ol>
                     <li><a href="https://docs.google.com/spreadsheets/d/1g1SqqR6QawK8zJe2nRXJz9vB4VfqMLHI9AbfX6fisr8" target="_blank" title="새창열림">템플릿</a>에 접속합니다.</li>
-                    <li><kbd>파일 <i class="fa fa-arrow-right"></i> 사본만들기</kbd> 버튼을 클릭해서 자신의 구글 스프레드 시트에 사본을 저장합니다.<br /><strong class="text-info">(이하 "<span class="text-primary">시트</span>"로 지칭합니다. )</strong></li>
-                    <li><span class="text-primary">시트</span>의 탭의 제목을 변경합니다.</li>
-                    <li><span class="text-primary">시트</span>에서 하얀색 부분을 삭제하고, Papers에 필요한 정보를 채워넣습니다.</li>
+                    <li><kbd>파일 <i class="fa fa-arrow-right"></i> 사본만들기</kbd> 버튼을 클릭해서 자신의 구글 스프레드 시트에 사본을 저장합니다.<br /><strong class="text-info">(이하 "<span class="text-sheet">시트</span>"로 지칭합니다. )</strong></li>
+                    <li><span class="text-sheet">시트</span>의 탭의 제목을 변경합니다.</li>
+                    <li><span class="text-sheet">시트</span>에서 하얀색 부분을 삭제하고, Papers에 필요한 정보를 채워넣습니다.</li>
                 </ol>
                 <h3>2. 웹에 게시하기</h3>
                 <ol>
-                    <li><span class="text-primary">시트</span>에서 <kbd>파일 <i class="fa fa-arrow-right"></i> 웹에게시</kbd>를 클릭합니다.</li>
+                    <li><span class="text-sheet">시트</span>에서 <kbd>파일 <i class="fa fa-arrow-right"></i> 웹에게시</kbd>를 클릭합니다.</li>
                     <li>파란색 <kbd>게시</kbd> 버튼을 클릭하세요.</li>
                     <li>공유되어 나온 링크 URL을 복사해서 아래의 입력폼에 넣어주세요.</li>
                 </ol>
@@ -58,18 +58,21 @@ TODO 릴리즈 노트 추가.
                     <div class="input-group" style="width:100%">
                         <label class="sr-only" for="spreadsheetURL">복사된 Papers URL 입력</label>
                         <input type="url" class="form-control" name="" id="spreadsheetURL" placeholder="구글스프레드 공유 URL" />
-                        <span class="input-group-btn"><button class="btn btn-warning" type="submit">Papers 주소받기</button></span>
+                        <span class="input-group-btn"><button class="btn btn-warning" onclick="makePapersUrl();">Papers 주소받기</button></span>
                     </div>
-                    <p class="" style="padding-top: 10px;"><span class="text-primary">시트</span>에서 복사된 공유링크를 넣으시고, <kbd>Papers 주소받기</kbd> 버튼을 누르세요!</p>
+                    <p id="papersUrl" style="padding-top: 10px;"><span class="text-sheet">시트</span>에서 복사된 공유링크를 넣으시고, <kbd>Papers 주소받기</kbd> 버튼을 누르세요!</p>
+
+
                     <!--
                     Papers :
                     -->
                 </section>
                 <h3>4. 활용팁!</h3>
                 <ul>
-                    <li>Papers는 Github와 구글 스프레드시트가 망하지 않는한 어떤 기기든 접근이 가능합니다.</li>
+                    <li>Papers는 <a href="http://github.com" target="_blank" title="새창열림">Github</a>와 <a href="https://www.google.com/intl/ko_KR/sheets/about/" target="_blank" title="새창열림">구글스프레드시트</a>가 망하지 않는한 어떤 기기든 접근이 가능합니다.</li>
                     <li>루트경로에 <code>http://</code> 로 시작하는 경로를 심으면 외부에서도 볼수 있습니다.</li>
                     <li>시트를 "웹에게시" 할꺼면 그냥 전체공유 걸어버리면 기획자에게 검수를 맡길수 있습니다!</li>
+                    <li>Papers의 경로는 <code>http://dstyle0210.github.io/papers/dist/papers.html?papers=<span>스프레드시트아이디</span></code>로 구성되어있습니다.</li>
                 </ul>
             </article>
             <!-- // Papers 연결하기 :: PapersConnectSec -->
@@ -182,6 +185,15 @@ try {
     var pageTracker = _gat._getTracker("UA-56483625-2");
     pageTracker._trackPageview();
 } catch(err) {}
+</script>
+<script src="src/js/lib/jquery.js"></script>
+<script>
+function makePapersUrl(){
+    var dumpUrl = $("#spreadsheetURL").val();
+    var paperUrl = (dumpUrl) ? ((dumpUrl).split("/d/")[1]).split("/pubhtml")[0] : "복사된 URL을 입력하세요.";
+    var yourPapers = "http://dstyle0210.github.io/papers/dist/papers.html?papers="+paperUrl;
+    $("#papersUrl").html("Papers : <a href='"+yourPapers+"'>"+yourPapers+"</a>");
+};
 </script>
 </body>
 </html>
