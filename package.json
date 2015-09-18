@@ -18,6 +18,7 @@
   "homepage": "https://github.com/dstyle0210/papers",
   "devDependencies": {
     "gulp": "^3.9.0",
+    "gulp-copy": "0.0.2",
     "gulp-csso": "^1.0.0",
     "gulp-sass": "^2.0.4"
   }

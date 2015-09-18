@@ -1,0 +1,83 @@
+@charset "UTF-8";
+@import "../src/sass/bootstrap_variables";
+
+body,kbd{font-family:"Nanum Barun Gothic";font-weight:400;}
+
+// Header.
+header{background:#333;border-bottom:10px solid $brand-warning;
+  h1{margin:0;padding:15px 0;text-align:center;color:#fff;font-family: 'Poiret One', cursive;}
+
+  .btnSec{
+    @media (min-width: $screen-sm-min + 1px) {
+      position:absolute;top:20px;right:20px;
+      a{margin-left:15px;}
+    }
+    @media (max-width: $screen-sm) {
+      padding-top:10px;width:100%;overflow:hidden;background: $brand-warning;text-align:center;
+      a{margin:0 10px;}
+    }
+    a{display:inline-block;color:#fff;}
+  }
+}
+
+
+// 설명서(메뉴얼)
+.papersManualSec{margin:40px auto;max-width:1024px;
+  h2{font-size:24px;}
+  h3{font-size:18px;}
+  li{padding-bottom:5px;}
+
+  // row 레이아웃
+  .papersManualRow0{padding-bottom:40px;border-bottom:1px dashed #ccc;}
+  .papersManualRow1{padding-top:40px;}
+  // 연결하기
+  .papersConnectDiv{
+    @media (max-width: $screen-md) {
+      margin-bottom:20px;border-bottom:1px dashed #ccc;
+    }
+    // URL 생성하기.
+    .makeUrlSec{
+      #spreadsheetURL{width:100%;}
+    }
+  }
+  .papersConnectSec{}
+
+  // 설명,소개
+  .papersReviewDiv{
+
+
+    @media (min-width: $screen-md-min) {
+      border-left:1px dashed #ccc;
+    }
+
+
+    // 데모 보기
+    .papersDemoSec{
+      .btnDiv{padding-top:10px;text-align:center;}
+    }
+
+    // 설명부분
+    .papersReviewSec{}
+
+  }
+
+
+  // 도움말 , Q&A
+  .papersHelpDiv{
+    @media (min-width: $screen-sm-min) {
+      border-right:1px dashed #ccc;
+    }
+  }
+  .papersHelpSec{}
+
+  // 릴리즈노트
+  .papersReleaseDiv{
+    @media (max-width: $screen-sm - 1px) {
+      border-top:1px dashed #ccc;
+    }
+  }
+}
+
+
+// 풋터
+footer{width:100%;  overflow: hidden;background:#333;color:#fff;}
