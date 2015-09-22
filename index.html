@@ -16,9 +16,7 @@
     <![endif]-->
 </head>
 <body>
-<!--
-TODO 릴리즈 노트 추가.
--->
+
 <!-- Papers Header -->
 <header class="headerSec container-fluid">
     <div class="row">
@@ -149,6 +147,10 @@ TODO 릴리즈 노트 추가.
                     <h3>1행이 없어요.</h3>
                     <p>구글스프레드시트의 정보를 정리하기 위해서 JSON key명이 들어가 있습니다.<small class="text-danger">(수정 및 삭제하지 마세요)</small> 시트에서는 도움 안되니 숨기기 처리해주세요.</p>
                 </li>
+                <li>
+                    <h3>1열에 "No"는 뭐예요?</h3>
+                    <p>오프라인으로 처리할려면 모든 key을 알아야 합니다. 일단 온라인에서는 무관합니다. (있든 없든)</p>
+                </li>
             </ul>
             </article>
             <!-- Papers 도움말 :: papersReviewSec -->
@@ -157,12 +159,31 @@ TODO 릴리즈 노트 추가.
         <div class="papersReleaseDiv col-md-4 col-sm-4">
             <!-- Papers 릴리즈노트 :: papersReviewSec -->
             <article class="papersReleaseSec">
-                <h2>릴리즈노트</h2>
+                <h2>릴리즈노트(0.9.x)</h2>
                 <ul>
-                    <li>프로토타입(0.9.1) 배포. <span class="label label-default">2015.09.18</span></h3></li>
+                    <li title="0.9.1">프로토타입(0.9.1) 배포. <span class="label label-default">2015.09.18</span></li>
+                    <li title="0.9.2">requirejs AMD 구조로 변경. <span class="label label-default">2015.09.21</span></li>
+                    <li title="0.9.3">오프라인 버전을 위해서 "No" 부분 추가. <span class="label label-default">2015.09.21</span></li>
                 </ul>
             </article>
             <!-- // Papers 릴리즈노트 :: papersReviewSec -->
+
+            <!-- Papers 업데이트 할수도있는 애들 :: papersReviewSec -->
+            <article class="papersTodoSec">
+                <h2>업데이트 될지도 모름!</h2>
+                <ul>
+                    <li><del>AMD로 로딩부분 구현(requirejs)</del> <span class="label label-default">0.9.2</span></li>
+                    <li>종료일 기준 퍼블완료가 되지 않으면, 빨간색으로 표기</li>
+                    <li>전체펼침 버튼</li>
+                    <li>검수자 정보 진행상태 안으로 포함</li>
+                    <li>단어 검색 추가</li>
+                    <li>풋터 디자인 수정</li>
+                    <li>오프라인 버전</li>
+                    <li>"삭제됨" 진행상태 추가</li>
+                    <li>에버노트 링크 연결</li>
+                </ul>
+            </article>
+            <!-- // Papers 업데이트 할수도있는 애들 :: papersReviewSec -->
         </div>
     </div>
 </section>
