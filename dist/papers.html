@@ -21,6 +21,7 @@ TODO AMD로 로딩부분 구현
 TODO 오프라인 버전 -> grunt-excel-as-json
 TODO 삭제됨 컨디션 추가
 TODO 에버노트 연결
+TODO 타이틀도 바뀔수 있도록
 
 -->
 <!-- TODO 특정 버튼을 누르면 다 펼쳐지도록? -->
@@ -45,8 +46,23 @@ TODO 에버노트 연결
             </div>
         </div>
         <div class="container-fluid">
-            <div class="iconGuide">
-                <strong ng-repeat="condition in conditionStats"><span class="hidden-xs">{{condition.name}}</span> <span class="ico {{condition.className}}">.{{condition.className}}</span></strong>
+            <div class="row">
+                <div class="col-xs-2">
+                    <!-- 패널 토글기능 -->
+                    <div class="panelControl">
+                        <button type="button" class="btn btn-info btn-sm" id="panelControlBtn" data-toggle="button" aria-pressed="false" autocomplete="off">
+                            <i class="fa fa-toggle-on"></i><span class="sr-only">패널열기</span>
+                        </button>
+                    </div>
+                    <!-- // 패널 토글기능 -->
+                </div>
+                <div class="col-xs-10">
+                    <!-- 진행상태 설명 -->
+                    <div class="iconGuide">
+                        <strong ng-repeat="condition in conditionStats"><span class="hidden-xs">{{condition.name}}</span> <span class="ico {{condition.className}}">.{{condition.className}}</span></strong>
+                    </div>
+                    <!-- // 진행상태 설명 -->
+                </div>
             </div>
         </div>
     </div>
@@ -118,5 +134,15 @@ TODO 에버노트 연결
 
 
 <script data-main="js/papers" src="js/lib/require.js"></script>
+<script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-56483625-2");
+        pageTracker._trackPageview();
+    } catch(err) {}
+</script>
 </body>
 </html>

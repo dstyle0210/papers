@@ -25,12 +25,14 @@ span.ico {display:inline-block; background:#fff; text-transform:uppercase; font-
 }
 
 // 아이콘 설명 부분
-.iconGuide{padding:5px 0 5px;font-size:12px;text-align:right;
+.iconGuide{padding-top:13px;font-size:12px;text-align:right;
   strong{display:inline-block; min-width:50px; margin-right:8px; font-size:12px; color:#444; font-weight:bold;
     .ico{margin-right:6px}
     &:last-child{margin-right:0;}
   }
 }
+// 패널 컨트롤 부분
+.panelControl{padding:5px 0 5px;}
 
 // 프로그래스 컬러
 .progress-bar-ready{background-color:$icoReadyColor;}

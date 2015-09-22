@@ -33,7 +33,7 @@ gulp.task('distsass', function () {
         .pipe(gulp.dest('./dist/css'));
 });
 gulp.task('distcopy', function () {
-    gulp.src(['./src/**','!./src/sass'])
+    gulp.src(['./src/**/*.{html,css,js}'])
         .pipe(gulp.dest('./dist'));
 });
 
