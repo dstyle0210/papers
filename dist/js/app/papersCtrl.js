@@ -9,7 +9,6 @@ define(["angular","underscore","js/app/papers_createApp"],function(angular,_,app
 
         // Query시작.
         $http.get($scope.spreadsheetJsonUrl).success(function(response){
-            console.log(response);
             var cells = _.map(response.feed.entry,function(data){
                 var o = {};
                 // 1차정제(스프레드시트 데이터)

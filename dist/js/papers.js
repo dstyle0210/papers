@@ -10,12 +10,10 @@ require.config({
         "bootstrap":"js/lib/bootstrap"
     },
     shim : {
-        "angular": {
-            exports: "angular"
-        }
+        "angular": { exports: "angular"},
+        "bootstrap" : { "deps" :['jquery'] }
     }
 });
-requirejs(["jquery"],function(){ $.noConflict(true); });
 requirejs(["js/app/jq_tooltip"],function(){ });
 requirejs(["js/app/papers_createApp","js/app/papersCtrl","js/app/papers_topPanelCtrl","js/app/papers_ListCtrl"],function(app){ });
 
