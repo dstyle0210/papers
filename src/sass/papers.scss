@@ -24,15 +24,21 @@ span.ico {display:inline-block; background:#fff; text-transform:uppercase; font-
   &.finish { background:$icoFinishColor; color:#FFF;}
 }
 
+// 패널 컨트롤 부분
+.panelControlSec{
+  .panelControl{padding:5px 0 5px;float:left;}
+  .panelSearchForm{padding:5px 0 5px 15px;float:left;
+    .form-control{height:31px}
+  }
+}
 // 아이콘 설명 부분
-.iconGuide{padding-top:13px;font-size:12px;text-align:right;
+.iconGuide{padding:11px 0 5px;font-size:12px;text-align:right;
   strong{display:inline-block; min-width:50px; margin-right:8px; font-size:12px; color:#444; font-weight:bold;
-    .ico{margin-right:6px}
+    .ico{margin-right:6px;padding-bottom:8px;}
     &:last-child{margin-right:0;}
   }
 }
-// 패널 컨트롤 부분
-.panelControl{padding:5px 0 5px;}
+
 
 // 프로그래스 컬러
 .progress-bar-ready{background-color:$icoReadyColor;}
@@ -56,7 +62,8 @@ span.ico {display:inline-block; background:#fff; text-transform:uppercase; font-
     }
   }
   .btnSet{padding-top:15px;text-align:right;min-width:110px;
-    a{display:inline-block;border:1px solid #fff;padding:5px;margin-left:8px;}
+    a{margin-left:5px;}
+    a.papersBtn{font-family: 'Poiret One', cursive;font-weight:700;font-size:14px;}
   }
   .glyphicon{color:#fff;}
   .fa{color:#fff;}

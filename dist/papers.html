@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Papers : 웹페이지 진행확인</title>
+    <title>Papers</title>
     <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
     <link href='http://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" />
@@ -13,58 +13,61 @@
 <body ng-app="paperApp">
 <!--
 TODO 종료일 기준 퍼블완료가 되지 않으면, 빨간색으로 표기
-TODO 전체펼침 버튼
 TODO 검수자 정보 진행상태 안으로 포함.
 TODO 단어 검색 추가.
 TODO 풋터 디자인 수정.
-TODO AMD로 로딩부분 구현
 TODO 오프라인 버전 -> grunt-excel-as-json
 TODO 삭제됨 컨디션 추가
 TODO 에버노트 연결
 TODO 타이틀도 바뀔수 있도록
 
 -->
-<!-- TODO 특정 버튼을 누르면 다 펼쳐지도록? -->
 <section ng-controller="papersCtrl">
     <!-- 상단 패널 : 타이틀 , 구글시트링크 , 깃허브링크 , 진행상태, 검색바 -->
     <div ng-controller="papers_topPanelCtrl">
+
         <div class="papersHeader container-fluid">
             <div class="row">
-                <div class="paersH1 col-md-6 col-xs-7"><h1><span>Papers :</span> <strong>{{sheetTitle}}</strong></h1></div>
-                <div class="btnSet col-md-2 col-md-push-4 col-xs-5 col-xs-push-0">
-                    <a href="{{spreadsheetPage}}" title="Paper '{{sheetTitle}}' 스프레드 시트로 이동" target="_blank"><i class="fa fa-file-text-o fa-lg"></i></a>
-                    <a href="https://github.com/dstyle0210/papers" title="Papers GitHub" target="_blank"><i class="fa fa-github-alt fa-lg"></i></a>
+                <div class="paersH1 col-xs-6"><h1><span>Papers :</span> <strong>{{sheetTitle}}</strong></h1></div>
+                <div class="btnSet col-xs-6">
+                    <!--<button type="button" class="btn btn-info btn-sm" data-toggle="button" aria-pressed="false" autocomplete="off" title="테스크?"><i class="fa fa-tasks fa-lg"></i></button>
+                    <button type="button" class="btn btn-info btn-sm" data-toggle="button" aria-pressed="false" autocomplete="off" title="검색창 열기"><i class="fa fa-search fa-lg"></i></button>-->
+                    <a href="{{spreadsheetPage}}" class="btn btn-warning btn-sm" title="Paper '{{sheetTitle}}' 스프레드 시트로 이동" target="_blank"><i class="fa fa-file-text-o fa-lg"></i></a>
+                    <a href="https://github.com/dstyle0210/papers" class="btn btn-warning btn-sm" title="Papers GitHub" target="_blank"><i class="fa fa-github-alt fa-lg"></i></a>
+                    <a href="https://dstyle0210.github.io/papers" class="btn btn-default btn-sm papersBtn" title="Papers 사이트로 이동" target="_blank">Papers</a>
                 </div>
-                <div class="progressCaseDiv col-md-4 col-md-pull-2 col-xs-12 col-xs-pull-0 ">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-{{condition.className}}  progress-bar-striped" style="width:{{ totalCondition[condition.className+'Per'] }}%" ng-repeat="condition in conditionStats">
-                            <strong>{{ totalCondition[condition.className+'Per'] }}%</strong> <span class="sr-only">{{ totalCondition[condition.className+'Per'] }}% Complete ({{condition.name}})</span>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
-        <div class="container-fluid">
+
+        <!-- 패널 기능 , 전체 진행상태 -->
+        <div class="panelControlSec container-fluid">
             <div class="row">
-                <div class="col-xs-2">
+                <div class="col-sm-4 col-xs-12">
                     <!-- 패널 토글기능 -->
-                    <div class="panelControl">
+                    <div class="panelControl col-xs-1">
                         <button type="button" class="btn btn-info btn-sm" id="panelControlBtn" data-toggle="button" aria-pressed="false" autocomplete="off">
                             <i class="fa fa-toggle-on"></i><span class="sr-only">패널열기</span>
                         </button>
                     </div>
                     <!-- // 패널 토글기능 -->
+                    <!-- 검색 -->
+                    <div class="panelSearchForm col-xs-11">
+                        <label class="sr-only" for="papersSearchInput">Papers 검색</label>
+                        <input type="text" class="form-control" id="papersSearchInput" placeholder="검색어를 입력하세요" ng-model="query.word" />
+                    </div>
+                    <!-- // 검색 -->
                 </div>
-                <div class="col-xs-10">
+                <div class="col-sm-8 col-xs-12">
                     <!-- 진행상태 설명 -->
                     <div class="iconGuide">
-                        <strong ng-repeat="condition in conditionStats"><span class="hidden-xs">{{condition.name}}</span> <span class="ico {{condition.className}}">.{{condition.className}}</span></strong>
+                        <strong ng-repeat="condition in conditionStats" class="visible-md-inline-block visible-lg-inline-block" title="{{condition.name}}"><span class="ico {{condition.className}}">{{condition.name}}</span> {{ totalCondition[condition.className+'Per'] }}%</strong>
+                        <strong ng-repeat="condition in conditionStats" class="visible-xs-inline-block visible-sm-inline-block" title="{{condition.name}}"><span class="ico {{condition.className}}">{{ totalCondition[condition.className+'Per'] }}%</span></strong>
                     </div>
                     <!-- // 진행상태 설명 -->
                 </div>
             </div>
         </div>
+        <!-- // 패널 기능 , 전체 진행상태 -->
     </div>
     <!-- // 상단 패널 : 타이틀 , 구글시트링크 , 깃허브링크 , 진행상태, 검색바 -->
 
@@ -72,7 +75,7 @@ TODO 타이틀도 바뀔수 있도록
     <div class="container-fluid">
         <section class="gateSection" ng-controller="papers_ListCtrl">
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                <div class="panel panel-default" ng-repeat="book in books">
+                <div class="panel panel-default" ng-repeat="book in books | filter:query.word">
                     <!-- Default panel contents -->
                     <div class="panel-heading" role="tab">
                         <div class="row">
@@ -94,7 +97,7 @@ TODO 타이틀도 바뀔수 있도록
                         <table class="fileListTable table table-hover">
                             <thead>
                             <tr>
-                                <th class="paper">페이지명</th>
+                                <th class="paper">페이지명 {{query.word}}</th>
                                 <th class="worker hidden-xs">업무자</th>
                                 <th class="stats">진행상태(완료일)</th>
                                 <th class="debug hidden-xs hidden-sm">검수일</th>
@@ -102,7 +105,7 @@ TODO 타이틀도 바뀔수 있도록
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="paper in book.papers">
+                            <tr ng-repeat="paper in book.papers | filter:query.word">
                                 <td class="paper">
                                     <a href="{{ paper.file }}" ng-if="paper.file!=''">
                                         <span>{{ paper.depth1 }}</span>

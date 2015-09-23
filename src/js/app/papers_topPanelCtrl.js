@@ -2,7 +2,7 @@
  * Created by Administrator on 2015-09-21.
  */
 define(["angular","underscore","js/app/papers_createApp"],function(angular,_,app){
-    app.controller("papers_topPanelCtrl",function($scope){
+    app.controller("papers_topPanelCtrl",function($scope,panelQuery){
         // 구글스프레드시트 링크 생성
         $scope.spreadsheetPage = "https://docs.google.com/spreadsheets/d/"+$scope.spreadsheetId;
 
@@ -21,5 +21,8 @@ define(["angular","underscore","js/app/papers_createApp"],function(angular,_,app
             });
             $scope.totalCondition = count;
         });
+
+        // 검색을 위한 데이터 바인딩 (factory : "panelQuery" ) by papers_createApp.js
+        $scope.query = panelQuery;
     });
 });

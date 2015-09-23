@@ -79,6 +79,10 @@ header{background:#333;border-bottom:10px solid $brand-warning;
     @media (max-width: $screen-sm - 1px) {
       border-top:1px dashed #ccc;
     }
+    .papersReleaseSec h2{
+      *{vertial-align:middle;}
+      .label{font-size:11px;}
+    }
   }
   // 업데이트 예정중.
   .papersTodoSec{
