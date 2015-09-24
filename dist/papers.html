@@ -14,13 +14,11 @@
 <!--
 TODO 종료일 기준 퍼블완료가 되지 않으면, 빨간색으로 표기
 TODO 검수자 정보 진행상태 안으로 포함.
-TODO 단어 검색 추가.
 TODO 풋터 디자인 수정.
 TODO 오프라인 버전 -> grunt-excel-as-json
-TODO 삭제됨 컨디션 추가
+TODO 제외됨 컨디션 추가
 TODO 에버노트 연결
-TODO 타이틀도 바뀔수 있도록
-
+TODO 파비콘 추가?
 -->
 <section ng-controller="papersCtrl">
     <!-- 상단 패널 : 타이틀 , 구글시트링크 , 깃허브링크 , 진행상태, 검색바 -->
@@ -34,7 +32,7 @@ TODO 타이틀도 바뀔수 있도록
                     <button type="button" class="btn btn-info btn-sm" data-toggle="button" aria-pressed="false" autocomplete="off" title="검색창 열기"><i class="fa fa-search fa-lg"></i></button>-->
                     <a href="{{spreadsheetPage}}" class="btn btn-warning btn-sm" title="Paper '{{sheetTitle}}' 스프레드 시트로 이동" target="_blank"><i class="fa fa-file-text-o fa-lg"></i></a>
                     <a href="https://github.com/dstyle0210/papers" class="btn btn-warning btn-sm" title="Papers GitHub" target="_blank"><i class="fa fa-github-alt fa-lg"></i></a>
-                    <a href="https://dstyle0210.github.io/papers" class="btn btn-default btn-sm papersBtn" title="Papers 사이트로 이동" target="_blank">Papers</a>
+                    <a href="https://dstyle0210.github.io/papers" class="btn btn-default btn-sm papersBtn" title="Papers 사이트로 이동" target="_blank"><i class="fa fa-link"></i> Papers</a>
                 </div>
             </div>
         </div>
@@ -60,9 +58,15 @@ TODO 타이틀도 바뀔수 있도록
                 <div class="col-sm-8 col-xs-12">
                     <!-- 진행상태 설명 -->
                     <div class="iconGuide">
-                        <strong ng-repeat="condition in conditionStats" class="visible-md-inline-block visible-lg-inline-block" title="{{condition.name}}"><span class="ico {{condition.className}}">{{condition.name}}</span> {{ totalCondition[condition.className+'Per'] }}%</strong>
-                        <strong ng-repeat="condition in conditionStats" class="visible-xs-inline-block visible-sm-inline-block" title="{{condition.name}}"><span class="ico {{condition.className}}">{{ totalCondition[condition.className+'Per'] }}%</span></strong>
-                    </div>
+                        <strong ng-repeat="condition in totalStats" ng-hide="exclusionCheck" class="visible-md-inline-block visible-lg-inline-block" title="{{condition.name}}"><span class="ico {{condition.className}}">{{condition.name}}</span> {{ totalCondition[condition.className+'Per'] }}%</strong>
+                        <strong ng-repeat="condition in totalStats" ng-hide="exclusionCheck" class="visible-xs-inline-block visible-sm-inline-block" title="{{condition.name}}"><span class="ico {{condition.className}}">{{ totalCondition[condition.className+'Per'] }}%</span></strong>
+                        <strong ng-repeat="condition in exclusionStats" ng-show="exclusionCheck" class="visible-md-inline-block visible-lg-inline-block" title="{{condition.name}}"><span class="ico {{condition.className}}">{{condition.name}}</span> {{ exclusionCondition[condition.className+'Per'] }}%</strong>
+                        <strong ng-repeat="condition in exclusionStats" ng-show="exclusionCheck" class="visible-xs-inline-block visible-sm-inline-block" title="{{condition.name}}"><span class="ico {{condition.className}}">{{ exclusionCondition[condition.className+'Per'] }}%</span></strong>
+                        <span class="exclusionCheckSec btn-group">
+                            <label class="btn btn-info btn-xs" ng-class="{'btn-danger':exclusionCheck}">
+                                <input type="checkbox" autocomplete="off" ng-model="exclusionCheck"> <i class="fa" ng-class="{'fa-plus-square':exclusionCheck,'fa-minus-square':!exclusionCheck}"></i>
+                            </label>
+                        </span>
                     <!-- // 진행상태 설명 -->
                 </div>
             </div>
@@ -81,9 +85,14 @@ TODO 타이틀도 바뀔수 있도록
                         <div class="row">
                             <div class="col-md-4 col-xs-12"><a data-toggle="collapse" data-parent="#accordion" href="#{{ book.bookId }}Book">{{ book.bookTitle }}</a></div>
                             <div class="col-md-8 col-xs-12">
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-{{condition.className}}  progress-bar-striped" style="width:{{ book.stats[condition.className+'Per'] }}%" ng-repeat="condition in conditionStats">
+                                <div class="progress" ng-hide="exclusionCheck">
+                                    <div class="progress-bar progress-bar-{{condition.className}}  progress-bar-striped" style="width:{{ book.stats[condition.className+'Per'] }}%" ng-repeat="condition in totalStats">
                                         <strong>{{ book.stats[condition.className+'Per'] }}%</strong> <span class="sr-only">{{ book.stats[condition.className+'Per'] }}% Complete ({{condition.name}})</span>
+                                    </div>
+                                </div>
+                                <div class="progress" ng-show="exclusionCheck">
+                                    <div class="progress-bar progress-bar-{{condition.className}}  progress-bar-striped" style="width:{{ book.exclusionStats[condition.className+'Per'] }}%" ng-repeat="condition in exclusionStats">
+                                        <strong>{{ book.exclusionStats[condition.className+'Per'] }}%</strong> <span class="sr-only">{{ book.exclusionStats[condition.className+'Per'] }}% Complete ({{condition.name}})</span>
                                     </div>
                                 </div>
                             </div>

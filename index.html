@@ -59,18 +59,16 @@
                         <span class="input-group-btn"><button class="btn btn-warning" onclick="makePapersUrl();">Papers 주소받기</button></span>
                     </div>
                     <p id="papersUrl" style="padding-top: 10px;"><span class="text-sheet">시트</span>에서 복사된 공유링크를 넣으시고, <kbd>Papers 주소받기</kbd> 버튼을 누르세요!</p>
-
-                    <!--
-                    Papers :
-                    -->
                 </section>
                 <h3>4. 활용팁!</h3>
-                <ul>
-                    <li>Papers는 <a href="http://github.com" target="_blank" title="새창열림">Github</a>와 <a href="https://www.google.com/intl/ko_KR/sheets/about/" target="_blank" title="새창열림">구글스프레드시트</a>가 망하지 않는한 어떤 기기든 접근이 가능합니다.</li>
-                    <li>루트경로에 <code>http://</code> 로 시작하는 경로를 심으면 외부에서도 볼수 있습니다.</li>
-                    <li>시트를 "웹에게시" 할꺼면 그냥 전체공유 걸어버리면 기획자에게 검수를 맡길수 있습니다!</li>
-                    <li>Papers의 경로는 <code>http://dstyle0210.github.io/papers/dist/papers.html?papers=<span>스프레드시트아이디</span></code>로 구성되어있습니다.</li>
-                </ul>
+                <section class="takeTipSec">
+                    <ul>
+                        <li>Papers는 <a href="http://github.com" target="_blank" title="새창열림">Github</a>와 <a href="https://www.google.com/intl/ko_KR/sheets/about/" target="_blank" title="새창열림">구글스프레드시트</a>가 망하지 않는한 어떤 기기든 접근이 가능합니다.</li>
+                        <li>루트경로에 <code>http://</code> 로 시작하는 경로를 심으면 외부에서도 볼수 있습니다.</li>
+                        <li>시트를 "웹에게시" 할꺼면 그냥 전체공유 걸어버리면 기획자에게 검수를 맡길수 있습니다!</li>
+                        <li>Papers의 경로는 <code>http://dstyle0210.github.io/papers/dist/papers.html?papers=<span>스프레드시트아이디</span></code>로 구성되어있습니다.</li>
+                    </ul>
+                </section>
             </article>
             <!-- // Papers 연결하기 :: PapersConnectSec -->
 
@@ -144,6 +142,29 @@
                     </dl>
                 </li>
                 <li>
+                    <h3>진행상태 소개</h3>
+                    <dl>
+                        <dt class="text-muted">진행대기</dt>
+                        <dd>퍼블리싱을 하기위한 리소스가 부족한 상태입니다. 초기에 설정하는 값 입니다.</dd>
+                    </dl>
+                    <dl>
+                        <dt class="text-primary">퍼블완료</dt>
+                        <dd>퍼블리싱이 완료된 페이지 입니다. 검수자에게 요청하여 검수를 진행합니다.</dd>
+                    </dl>
+                    <dl>
+                        <dt class="text-warning">검수중</dt>
+                        <dd>퍼블이 완료되었으나, 수정사항이 발생하여 처리중 이거나, 미확정인 상황인경우 사용합니다.</dd>
+                    </dl>
+                    <dl>
+                        <dt class="text-success">개발가능</dt>
+                        <dd>검수까지 종료되어 개발이 가능한 상태입니다. 개발자는 바로 리소스를 가져다가 사용할수 있습니다.</dd>
+                    </dl>
+                    <dl>
+                        <dt class="text-danger">제외됨</dt>
+                        <dd>과업범위 안에 있었으나, 특정 사유로 인하여 제외되면 사용합니다.</dd>
+                    </dl>
+                </li>
+                <li>
                     <h3>1행이 없어요.</h3>
                     <p>구글스프레드시트의 정보를 정리하기 위해서 JSON key명이 들어가 있습니다.<small class="text-danger">(수정 및 삭제하지 마세요)</small> 시트에서는 도움 안되니 숨기기 처리해주세요.</p>
                 </li>
@@ -159,17 +180,21 @@
         <div class="papersReleaseDiv col-md-4 col-sm-4">
             <!-- Papers 릴리즈노트 :: papersReviewSec -->
             <article class="papersReleaseSec">
-                <h2>릴리즈노트(0.9.5) <span class="label label-default">2015.09.23</span></h2>
+                <h2>릴리즈노트(0.9.6) <span class="label label-default">2015.09.24</span></h2>
                 <!--<ul>
                     <li title="0.9.1">프로토타입(0.9.1) 배포. <span class="label label-default">2015.09.18</span></li>
                     <li title="0.9.2">requirejs AMD 구조로 변경. <span class="label label-default">2015.09.21</span></li>
                     <li title="0.9.3">오프라인 버전을 위해서 "No" 부분 추가. <span class="label label-default">2015.09.21</span></li>
                     <li title="0.9.4">전체토글버튼 추가! <span class="label label-default">2015.09.22</span></li>
                 </ul>-->
-                <ul title="0.9.5">
+                <!--<ul title="0.9.5" date="2015.09.23">
                     <li>단어 검색 추가</li>
                     <li>전체진행률 삭제, 아이콘부분 재정리</li>
                     <li>Papers 본사이트(현재페이지)로 이동 버튼 추가</li>
+                </ul>-->
+                <ul title="0.9.6" date="2015.09.24">
+                    <li>제외됨 항목 추가.</li>
+                    <li>초기는 제외됨도 포함 전체 정보 표시, "진행상태" 우측 버튼을 누르면 제외됨을 빼고 나머지 진행률이 나타납니다.</li>
                 </ul>
             </article>
             <!-- // Papers 릴리즈노트 :: papersReviewSec -->
@@ -185,7 +210,7 @@
                     <li><del>단어 검색 추가</del> <span class="label label-default">0.9.5</span></li>
                     <li>풋터 디자인 수정</li>
                     <li>오프라인 버전</li>
-                    <li>"삭제됨" 진행상태 추가</li>
+                    <li><del>"제외됨" 진행상태 추가</del> <span class="label label-default">0.9.6</span></li>
                     <li>에버노트 링크 연결</li>
                 </ul>
             </article>

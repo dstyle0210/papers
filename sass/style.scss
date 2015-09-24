@@ -43,6 +43,10 @@ header{background:#333;border-bottom:10px solid $brand-warning;
     .makeUrlSec{
       #spreadsheetURL{width:100%;}
     }
+    //활용팁
+    .takeTipSec{
+      code{word-break:break-all;}
+    }
   }
   .papersConnectSec{}
 

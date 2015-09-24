@@ -4,7 +4,8 @@ define(["angular","underscore","js/app/papers_createApp"],function(angular,_,app
 
         // Query을 위한 구글스프레드 ID 수급.
         var query = ((location.href).split("papers=")[1]);
-        $scope.spreadsheetId = (!query) ? "1g1SqqR6QawK8zJe2nRXJz9vB4VfqMLHI9AbfX6fisr8" : query.split("/")[0];
+        // $scope.spreadsheetId = (!query) ? "1g1SqqR6QawK8zJe2nRXJz9vB4VfqMLHI9AbfX6fisr8" : query.split("/")[0];
+        $scope.spreadsheetId = (!query) ? "1jhptQ7mCaQ3lN4LoUhMzGu_cSiNhXyfSIdLt3X2ItJE" : query.split("/")[0];
         $scope.spreadsheetJsonUrl = "https://spreadsheets.google.com/feeds/list/"+$scope.spreadsheetId+"/1/public/values?alt=json";
 
         // Query시작.
@@ -23,7 +24,8 @@ define(["angular","underscore","js/app/papers_createApp"],function(angular,_,app
             cells = _.rest(cells); // 맨 처음 데이터를 지우고 리턴함.
 
             // 2차정제 (실제로 사용할 데이터)
-            var conditionStats = {ready:"진행대기",done:"퍼블완료",edit:"검수중",finish:"개발가능"};
+            var totalStats = {ready:"진행대기",done:"퍼블완료",edit:"검수중",finish:"개발가능",del:"제외됨"};
+            var exclusionStats = {ready:"진행대기",done:"퍼블완료",edit:"검수중",finish:"개발가능"};
             var papers = _.map(cells,function(paper,idx){
 
                 if(paper.section == ""){
@@ -33,7 +35,7 @@ define(["angular","underscore","js/app/papers_createApp"],function(angular,_,app
                 }
 
                 // 현재 상태를 보여주기 위핸 컨디션 변경.
-                _.each(conditionStats,function(cond,key){
+                _.each(totalStats,function(cond,key){
                     if(paper.condition==cond){
                         paper.conditionClass = key;
                     };
@@ -56,20 +58,34 @@ define(["angular","underscore","js/app/papers_createApp"],function(angular,_,app
             _.each(paperGroups,function(paperGroup,key){
                 books.push({});
                 var book = books[(books.length-1)];
-                book.papers = _.rest(paperGroup); // 각 페이지별 정보.
                 book.bookTitle = paperGroup[0].section; // 책의 타이틀 (섹션 이름)
                 book.bookId = "sect"+key; // 책 고유 아이디
+
+                // 전체 목록 처리.
+                book.papers = _.rest(paperGroup); // 각 페이지별 정보.
                 book.size = _.size(book.papers); // 책의 paper 갯수.
-                book.stats = _.extend((_.object(_.keys(conditionStats),[0,0,0,0])), _.countBy(book.papers,function(paper){ return paper.conditionClass; }) );
+                book.stats = _.extend((_.object(_.keys(totalStats),[0,0,0,0,0])), _.countBy(book.papers,function(paper){ return paper.conditionClass; }) ); // 제외됨을 빼고, 나머지가 전체 퍼센트로 계산됨.
                 _.each(book.stats,function(item,key){ // 각 책의 페이퍼 진행상태 비율
                     book.stats[key+"Per"] = (Math.floor((book.stats[key]/book.size)*10000))/100;
-                })
+                });
+
+                // 제외됨 처리 (제외됨을 뺴고난 목록 , 크기 , 진행률)
+                book.exclusionPapers = _.filter(book.papers,function(book,key){ // 책 중에서 "제외됨"을 뺀 목록.
+                    return (book.conditionClass != "del");
+                });
+                book.exclusionSize = _.size(book.exclusionPapers);
+                book.exclusionStats = _.extend((_.object(_.keys(exclusionStats),[0,0,0,0])), _.countBy(book.exclusionPapers,function(paper){ return paper.conditionClass; }) ); // 제외됨을 빼고, 나머지가 전체 퍼센트로 계산됨.
+                _.each(book.exclusionStats,function(item,key){ // 각 책의 페이퍼 진행상태 비율
+                    book.exclusionStats[key+"Per"] = (Math.floor((book.exclusionStats[key]/book.exclusionSize)*10000))/100;
+                });
+                console.log(book.exclusionStats);
             });
 
             $scope.response = response; // 원본데이터를 통째로 가지고 다님.
             $scope.papers = papers; // 페이지 단위로 생성된 데이터 던져쥼.
             $scope.books = books; // 전체 데이터 던져쥼.
-            $scope.conditionStats = _.map(conditionStats,function(cond,key){ return {className:key,name:cond}; }); // 프로그래스 및 진행상태값 루프로 사용.
+            $scope.totalStats = _.map(totalStats,function(cond,key){ return {className:key,name:cond}; }); // 프로그래스 및 진행상태값 루프로 사용.
+            $scope.exclusionStats = _.filter($scope.totalStats,function(stats,key){return stats.className!="del" }); // 제외됨 뺴고, 프로그래스 및 진행상태값 루프로 사용.
         });
     });
 

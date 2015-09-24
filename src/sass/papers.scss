@@ -12,6 +12,7 @@ $icoReadyColor:$brand-muted; // 대기중
 $icoDoneColor:$brand-primary; // 퍼블종료,검수요청
 $icoEditColor:$brand-warning; // 검수진행중
 $icoFinishColor:$brand-success; // 개발가능
+$icoDelColor:$brand-danger; // 개발가능
 
 
 
@@ -22,6 +23,7 @@ span.ico {display:inline-block; background:#fff; text-transform:uppercase; font-
   &.done { background:$icoDoneColor; color:#FFF;}
   &.edit { background:$icoEditColor; color:#FFF;}
   &.finish { background:$icoFinishColor; color:#FFF;}
+  &.del { background:$icoDelColor; color:#FFF;}
 }
 
 // 패널 컨트롤 부분
@@ -33,10 +35,11 @@ span.ico {display:inline-block; background:#fff; text-transform:uppercase; font-
 }
 // 아이콘 설명 부분
 .iconGuide{padding:11px 0 5px;font-size:12px;text-align:right;
-  strong{display:inline-block; min-width:50px; margin-right:8px; font-size:12px; color:#444; font-weight:bold;
+  strong{display:inline-block; min-width:32px; margin-right:8px; font-size:12px; color:#444; font-weight:bold;
     .ico{margin-right:6px;padding-bottom:8px;}
     &:last-child{margin-right:0;}
   }
+  .exclusionCheckSec input{position:absolute;clip:rect(0,0,0,0);}
 }
 
 
@@ -45,6 +48,7 @@ span.ico {display:inline-block; background:#fff; text-transform:uppercase; font-
 .progress-bar-done{background-color:$icoDoneColor;}
 .progress-bar-edit{background-color:$icoEditColor;}
 .progress-bar-finish{background-color:$icoFinishColor;}
+.progress-bar-del{background-color:$icoDelColor;}
 
 // 헤더영역
 .panel-heading{
@@ -63,7 +67,9 @@ span.ico {display:inline-block; background:#fff; text-transform:uppercase; font-
   }
   .btnSet{padding-top:15px;text-align:right;min-width:110px;
     a{margin-left:5px;}
-    a.papersBtn{font-family: 'Poiret One', cursive;font-weight:700;font-size:14px;}
+    a.papersBtn{font-family: 'Poiret One', cursive;font-weight:700;font-size:14px;
+      .fa{color:#333;}
+    }
   }
   .glyphicon{color:#fff;}
   .fa{color:#fff;}
