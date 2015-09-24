@@ -78,7 +78,6 @@ define(["angular","underscore","js/app/papers_createApp"],function(angular,_,app
                 _.each(book.exclusionStats,function(item,key){ // 각 책의 페이퍼 진행상태 비율
                     book.exclusionStats[key+"Per"] = (Math.floor((book.exclusionStats[key]/book.exclusionSize)*10000))/100;
                 });
-                console.log(book.exclusionStats);
             });
 
             $scope.response = response; // 원본데이터를 통째로 가지고 다님.

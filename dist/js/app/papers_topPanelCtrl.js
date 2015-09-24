@@ -8,7 +8,9 @@ define(["angular","underscore","js/app/papers_createApp"],function(angular,_,app
 
         // 구글스프레드 시트 탭타이틀 가져옴.
         $scope.$watch("response",function(){
-            $scope.sheetTitle = $scope.response.feed.title.$t;
+            if($scope.response){
+                $scope.sheetTitle = $scope.response.feed.title.$t;
+            };
         });
 
         // 진도률 계산함.
@@ -16,7 +18,7 @@ define(["angular","underscore","js/app/papers_createApp"],function(angular,_,app
             // 전체 진도률 계산함.
             var papers = _.filter($scope.papers,function(paper){return (paper.condition!="");});
             var size = _.size(papers);
-            var count = _.countBy(papers,function(paper){ return paper.conditionClass; });
+            var count = _.extend((_.object(_.map($scope.totalStats,function(stats){return stats.className}),[0,0,0,0,0])), _.countBy(papers,function(paper){ return paper.conditionClass; }) );
             _.each(count,function(item,key){ // 각 책의 페이퍼 진행상태 비율
                 count[key+"Per"] = (Math.floor((item/size)*10000))/100;
             });
@@ -25,7 +27,7 @@ define(["angular","underscore","js/app/papers_createApp"],function(angular,_,app
             // 제외함 빼고 진도률 계산함.
             var exclusionPapers = _.filter($scope.papers,function(paper){return (paper.condition!="" && paper.conditionClass!="del");});
             var exclusionSize = _.size(exclusionPapers);
-            var exclusionCount = _.countBy(exclusionPapers,function(paper){ return paper.conditionClass; });
+            var exclusionCount = _.extend((_.object(_.map($scope.exclusionStats,function(stats){return stats.className}),[0,0,0,0,0])), _.countBy(exclusionPapers,function(paper){ return paper.conditionClass; }) );
             _.each(exclusionCount,function(item,key){ // 각 책의 페이퍼 진행상태 비율
                 exclusionCount[key+"Per"] = (Math.floor((item/exclusionSize)*10000))/100;
             });

@@ -35,7 +35,7 @@ span.ico {display:inline-block; background:#fff; text-transform:uppercase; font-
 }
 // 아이콘 설명 부분
 .iconGuide{padding:11px 0 5px;font-size:12px;text-align:right;
-  strong{display:inline-block; min-width:32px; margin-right:8px; font-size:12px; color:#444; font-weight:bold;
+  strong{display:inline-block; min-width:32px; margin-right:6px; font-size:12px; color:#444; font-weight:bold;
     .ico{margin-right:6px;padding-bottom:8px;}
     &:last-child{margin-right:0;}
   }
@@ -65,8 +65,8 @@ span.ico {display:inline-block; background:#fff; text-transform:uppercase; font-
 
     }
   }
-  .btnSet{padding-top:15px;text-align:right;min-width:110px;
-    a{margin-left:5px;}
+  .btnSet{padding-top:10px;text-align:right;min-width:110px;
+    a{display:inline-block;margin-top:5px;margin-left:2px;}
     a.papersBtn{font-family: 'Poiret One', cursive;font-weight:700;font-size:14px;
       .fa{color:#333;}
     }

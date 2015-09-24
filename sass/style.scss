@@ -97,4 +97,8 @@ header{background:#333;border-bottom:10px solid $brand-warning;
 
 
 // 풋터
-footer{width:100%;  overflow: hidden;background:#333;color:#fff;}
+footer{width:100%;padding-top:10px;overflow: hidden;background:#333;color:#fff;
+  p{text-align:center;color:#999;
+    a{color:#fff;}
+  }
+}
