@@ -2,6 +2,7 @@
 <html lang="ko" xmlns:width="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Papers</title>
     <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
@@ -116,7 +117,7 @@ TODO 핸드폰으로 보면 가라앉아염.
                             <tbody>
                             <tr ng-repeat="paper in book.papers | filter:query.word">
                                 <td class="paper">
-                                    <a href="{{ paper.file }}" ng-if="paper.file!=''">
+                                    <a href="{{ paper.file }}" ng-if="paper.file!=''" target="_blank">
                                         <span>{{ paper.depth1 }}</span>
                                         <span ng-show="paper.depth2"> &gt; {{ paper.depth2 }}</span>
                                         <span ng-show="paper.depth3"> &gt; {{ paper.depth3 }}</span>
