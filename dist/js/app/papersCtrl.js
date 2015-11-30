@@ -24,8 +24,8 @@ define(["angular","underscore","js/app/papers_createApp"],function(angular,_,app
             cells = _.rest(cells); // 맨 처음 데이터를 지우고 리턴함.
 
             // 2차정제 (실제로 사용할 데이터)
-            var totalStats = {ready:"진행대기",done:"퍼블완료",edit:"검수중",finish:"개발가능",del:"제외됨"};
-            var exclusionStats = {ready:"진행대기",done:"퍼블완료",edit:"검수중",finish:"개발가능"};
+            var totalStats = {ready:"진행대기",img:"진행중",done:"퍼블완료",edit:"검수중",finish:"개발가능",del:"제외됨"};
+            var exclusionStats = {ready:"진행대기",img:"진행중",done:"퍼블완료",edit:"검수중",finish:"개발가능"};
             var papers = _.map(cells,function(paper,idx){
 
                 if(paper.section == ""){
@@ -64,7 +64,7 @@ define(["angular","underscore","js/app/papers_createApp"],function(angular,_,app
                 // 전체 목록 처리.
                 book.papers = _.rest(paperGroup); // 각 페이지별 정보.
                 book.size = _.size(book.papers); // 책의 paper 갯수.
-                book.stats = _.extend((_.object(_.keys(totalStats),[0,0,0,0,0])), _.countBy(book.papers,function(paper){ return paper.conditionClass; }) ); // 제외됨을 빼고, 나머지가 전체 퍼센트로 계산됨.
+                book.stats = _.extend((_.object(_.keys(totalStats),[0,0,0,0,0,0])), _.countBy(book.papers,function(paper){ return paper.conditionClass; }) ); // 제외됨을 빼고, 나머지가 전체 퍼센트로 계산됨.
                 _.each(book.stats,function(item,key){ // 각 책의 페이퍼 진행상태 비율
                     book.stats[key+"Per"] = (Math.floor((book.stats[key]/book.size)*10000))/100;
                 });
