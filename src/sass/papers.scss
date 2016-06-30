@@ -13,7 +13,9 @@ $icoImgColor:$brand-info; // 대기중
 $icoDoneColor:$brand-primary; // 퍼블종료,검수요청
 $icoEditColor:$brand-warning; // 검수진행중
 $icoFinishColor:$brand-success; // 개발가능
-$icoDelColor:$brand-danger; // 개발가능
+$icoDelColor:$brand-danger; // 제외됨
+$icoDevColor:$brand-dev; // 개발중
+$icoEndColor:$brand-end; // 개발완료
 
 
 
@@ -26,6 +28,8 @@ span.ico {display:inline-block; background:#fff; text-transform:uppercase; font-
   &.edit { background:$icoEditColor; color:#FFF;}
   &.finish { background:$icoFinishColor; color:#FFF;}
   &.del { background:$icoDelColor; color:#FFF;}
+  &.dev { background:$icoDevColor; color:#FFF;}
+  &.end { background:$icoEndColor; color:#FFF;}
 }
 
 // 패널 컨트롤 부분
@@ -52,6 +56,8 @@ span.ico {display:inline-block; background:#fff; text-transform:uppercase; font-
 .progress-bar-edit{background-color:$icoEditColor;}
 .progress-bar-finish{background-color:$icoFinishColor;}
 .progress-bar-del{background-color:$icoDelColor;}
+.progress-bar-del{background-color:$icoDevColor;}
+.progress-bar-del{background-color:$icoEndColor;}
 
 // 헤더영역
 .panel-heading{
