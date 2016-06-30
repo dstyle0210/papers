@@ -24,8 +24,8 @@ define(["angular","underscore","js/app/papers_createApp"],function(angular,_,app
             cells = _.rest(cells); // 맨 처음 데이터를 지우고 리턴함.
 
             // 2차정제 (실제로 사용할 데이터)
-            var totalStats = {ready:"진행대기",img:"진행중",done:"퍼블완료",edit:"검수중",finish:"개발가능",del:"제외됨"};
-            var exclusionStats = {ready:"진행대기",img:"진행중",done:"퍼블완료",edit:"검수중",finish:"개발가능"};
+            var totalStats = {ready:"진행대기",img:"진행중",done:"퍼블완료",edit:"검수중",finish:"개발가능",del:"제외됨",dev:"개발중",end:"개발완료"};
+            var exclusionStats = {ready:"진행대기",img:"진행중",done:"퍼블완료",edit:"검수중",finish:"개발가능",dev:"개발중",end:"개발완료"};
             var papers = _.map(cells,function(paper,idx){
 
                 if(paper.section == ""){
